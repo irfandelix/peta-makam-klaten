@@ -152,16 +152,17 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
         </div>
       </div>
 
-      <MapContainer
-        center={center}
-        zoom={21}
-        maxBounds={bounds}
-        maxBoundsViscosity={1.0}
-        minZoom={19}
-        maxZoom={22}
-        className={`h-full w-full ${isAdmin ? 'cursor-cell' : ''}`}
-        zoomControl={false}
-      >
+        <MapContainer
+            center={center}
+            zoom={21}
+            // Kita hilangkan maxBounds sementara atau perlebar agar tidak mengunci saat zoom dekat
+            maxBounds={bounds.pad(0.5)} // Memberikan ruang ekstra 50% di sekitar area makam
+            maxBoundsViscosity={0.5}    // Biar tidak kaku seperti tembok
+            minZoom={18}
+            maxZoom={22}
+            className={`h-full w-full ${isAdmin ? 'cursor-cell' : ''}`}
+            zoomControl={false}
+        >
         <LayersControl position="topright">
           <BaseLayer name="Citra ATR/BPN">
             <TileLayer url="/tiles/{z}/{x}/{y}.png" maxZoom={22}/>
