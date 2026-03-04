@@ -164,7 +164,7 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
       >
         <LayersControl position="topright">
           <BaseLayer name="Citra ATR/BPN">
-            <TileLayer url="https://petadasar.atrbpn.go.id/main/wms/{z}/{x}/{y}" maxZoom={22}/>
+            <TileLayer url="/tiles/{z}/{x}/{y}.png" maxZoom={22}/>
           </BaseLayer>
           <BaseLayer checked name="Google Satellite">
             <TileLayer url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}" maxZoom={22}/>
