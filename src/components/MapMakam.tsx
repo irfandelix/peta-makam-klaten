@@ -164,10 +164,15 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
             zoomControl={false}
         >
         <LayersControl position="topright">
-          <BaseLayer name="Citra ATR/BPN">
-            <TileLayer url="/tiles/{z}/{x}/{y}.png" maxZoom={22}/>
+          <BaseLayer checked name="Citra Offline (QGIS)">
+          <TileLayer 
+              url="/tiles/{z}/{x}/{y}.png" 
+              maxZoom={22} 
+              maxNativeZoom={22} // PENTING: Ganti angka ini dengan folder angka paling besar hasil export QGIS kamu!
+              detectRetina={true} 
+            />
           </BaseLayer>
-          <BaseLayer checked name="Google Satellite">
+          <BaseLayer name="Google Satellite">
             <TileLayer url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}" maxZoom={22}/>
           </BaseLayer>
 
