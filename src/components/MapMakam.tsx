@@ -86,56 +86,65 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
         </button>
       </div>
 
-      {/* --- PANEL JUDUL & LEGENDA 7 BLOK --- */}
-      <div className="absolute top-4 left-14 z-[1000] pointer-events-none">
-        <div className="bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-xl border border-gray-200 w-56">
-          <h1 className="text-sm font-bold text-gray-800">DATABASE MAKAM</h1>
-          <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-3">Klaten, Jawa Tengah</p>
+    {/* --- PANEL JUDUL & LEGENDA (RESPONSIF) --- */}
+      <div className="absolute top-4 left-14 z-[1000]">
+        <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 w-48 md:w-56">
           
-          {/* Legenda Status */}
-          <div className="border-t border-gray-100 pt-2 mb-2">
-            <p className="text-[11px] font-bold text-gray-700 mb-1.5">Status Kaveling:</p>
-            <div className="flex items-center gap-2 mb-1.5">
-              <div className="w-3 h-3 bg-[#22c55e] border border-gray-300 rounded-sm"></div>
-              <span className="text-[10px] text-gray-600 font-medium">Tersedia / Kosong</span>
+          {/* Header Judul (Bisa diklik di HP untuk buka/tutup) */}
+          <div 
+            className="p-3 cursor-pointer md:cursor-default flex justify-between items-center"
+            onClick={() => {
+              // Hanya berfungsi sebagai toggle di layar kecil
+              if (window.innerWidth < 768) {
+                const content = document.getElementById('legend-content');
+                content?.classList.toggle('hidden');
+              }
+            }}
+          >
+            <div>
+              <h1 className="text-[12px] md:text-sm font-bold text-gray-800 leading-tight">DATABASE MAKAM</h1>
+              <p className="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest">Klaten, Jawa Tengah</p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-[#4a5568] border border-gray-300 rounded-sm"></div>
-              <span className="text-[10px] text-gray-600 font-medium">Terisi / Diboking</span>
-            </div>
+            {/* Icon Panah Kecil (Hanya muncul di HP) */}
+            <div className="md:hidden text-gray-400 text-xs">▼</div>
           </div>
+          
+          {/* Isi Legenda (Tersembunyi otomatis di HP, selalu muncul di Desktop) */}
+          <div id="legend-content" className="hidden md:block p-3 pt-0 border-t border-gray-100">
+            {/* Legenda Status */}
+            <div className="py-2">
+              <p className="text-[10px] md:text-[11px] font-bold text-gray-700 mb-1.5">Status Kaveling:</p>
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-3 h-3 bg-[#22c55e] border border-gray-300 rounded-sm"></div>
+                <span className="text-[9px] md:text-[10px] text-gray-600">Tersedia / Kosong</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-[#4a5568] border border-gray-300 rounded-sm"></div>
+                <span className="text-[9px] md:text-[10px] text-gray-600">Terisi / Diboking</span>
+              </div>
+            </div>
 
-          {/* Legenda Blok */}
-          <div className="border-t border-gray-100 pt-2">
-            <p className="text-[11px] font-bold text-gray-700 mb-1.5">Area Pembatas Blok:</p>
-            <div className="grid grid-cols-2 gap-y-1.5 gap-x-1">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#3b82f6] opacity-50 border border-[#3b82f6] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok A</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#a855f7] opacity-50 border border-[#a855f7] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok B</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#f97316] opacity-50 border border-[#f97316] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok C</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#ef4444] opacity-50 border border-[#ef4444] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Cikal Bakal</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#ec4899] opacity-50 border border-[#ec4899] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok D</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#eab308] opacity-50 border border-[#eab308] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok E</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 bg-[#14b8a6] opacity-50 border border-[#14b8a6] rounded-sm"></div>
-                <span className="text-[10px] text-gray-600 font-medium">Blok F</span>
+            {/* Legenda Blok */}
+            <div className="border-t border-gray-100 pt-2">
+              <p className="text-[10px] md:text-[11px] font-bold text-gray-700 mb-1.5">Area Pembatas Blok:</p>
+              <div className="grid grid-cols-2 gap-y-1.5 gap-x-1">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 bg-[#3b82f6] opacity-50 rounded-sm"></div>
+                  <span className="text-[9px] text-gray-600">Blok A</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 bg-[#a855f7] opacity-50 rounded-sm"></div>
+                  <span className="text-[9px] text-gray-600">Blok B</span>
+                </div>
+                {/* ... (Teruskan untuk C, Cikal Bakal, D, E, F sesuai warna sebelumnya) */}
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 bg-[#f97316] opacity-50 rounded-sm"></div>
+                  <span className="text-[9px] text-gray-600">Blok C</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 bg-[#ef4444] opacity-50 rounded-sm"></div>
+                  <span className="text-[9px] text-gray-600">Cikal Bakal</span>
+                </div>
               </div>
             </div>
           </div>
