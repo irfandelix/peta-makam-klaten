@@ -91,7 +91,7 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
 
     {/* --- PANEL JUDUL & LEGENDA (RESPONSIF) --- */}
       <div className="absolute top-4 left-14 z-[1000]">
-        <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 w-48 md:w-56">
+        <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 w-56 md:w-64">
           
           {/* Header Judul (Bisa diklik di HP untuk buka/tutup) */}
           <div 
@@ -105,48 +105,59 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
             }}
           >
             <div>
-              <h1 className="text-[12px] md:text-sm font-bold text-gray-800 leading-tight">DATABASE MAKAM</h1>
-              <p className="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest">Klaten, Jawa Tengah</p>
+              <h1 className="text-sm md:text-base font-bold text-gray-800 leading-tight">DATABASE MAKAM</h1>
+              <p className="text-xs text-gray-500 uppercase tracking-widest mt-0.5">Klaten, Jawa Tengah</p>
             </div>
             {/* Icon Panah Kecil (Hanya muncul di HP) */}
-            <div className="md:hidden text-gray-400 text-xs">▼</div>
+            <div className="md:hidden text-gray-400 text-sm">▼</div>
           </div>
           
           {/* Isi Legenda (Tersembunyi otomatis di HP, selalu muncul di Desktop) */}
           <div id="legend-content" className="hidden md:block p-3 pt-0 border-t border-gray-100">
             {/* Legenda Status */}
             <div className="py-2">
-              <p className="text-[10px] md:text-[11px] font-bold text-gray-700 mb-1.5">Status Kaveling:</p>
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-3 h-3 bg-[#22c55e] border border-gray-300 rounded-sm"></div>
-                <span className="text-[9px] md:text-[10px] text-gray-600">Tersedia / Kosong</span>
+              <p className="text-xs md:text-sm font-bold text-gray-700 mb-2">Status Kaveling:</p>
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-4 h-4 bg-[#22c55e] border border-gray-300 rounded-sm"></div>
+                <span className="text-xs text-gray-600">Tersedia / Kosong</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-[#4a5568] border border-gray-300 rounded-sm"></div>
-                <span className="text-[9px] md:text-[10px] text-gray-600">Terisi / Diboking</span>
+                <div className="w-4 h-4 bg-[#4a5568] border border-gray-300 rounded-sm"></div>
+                <span className="text-xs text-gray-600">Terisi / Diboking</span>
               </div>
             </div>
 
             {/* Legenda Blok */}
-            <div className="border-t border-gray-100 pt-2">
-              <p className="text-[10px] md:text-[11px] font-bold text-gray-700 mb-1.5">Area Pembatas Blok:</p>
-              <div className="grid grid-cols-2 gap-y-1.5 gap-x-1">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-[#3b82f6] opacity-50 rounded-sm"></div>
-                  <span className="text-[9px] text-gray-600">Blok A</span>
+            <div className="border-t border-gray-100 pt-2 pb-1">
+              <p className="text-xs md:text-sm font-bold text-gray-700 mb-2">Area Pembatas Blok:</p>
+              <div className="grid grid-cols-2 gap-y-2 gap-x-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#3b82f6] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok A</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-[#a855f7] opacity-50 rounded-sm"></div>
-                  <span className="text-[9px] text-gray-600">Blok B</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#a855f7] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok B</span>
                 </div>
-                {/* ... (Teruskan untuk C, Cikal Bakal, D, E, F sesuai warna sebelumnya) */}
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-[#f97316] opacity-50 rounded-sm"></div>
-                  <span className="text-[9px] text-gray-600">Blok C</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#f97316] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok C</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 bg-[#ef4444] opacity-50 rounded-sm"></div>
-                  <span className="text-[9px] text-gray-600">Cikal Bakal</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#ec4899] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok D</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#eab308] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok E</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 bg-[#14b8a6] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Blok F</span>
+                </div>
+                <div className="flex items-center gap-2 col-span-2 mt-0.5">
+                  <div className="w-3.5 h-3.5 bg-[#ef4444] opacity-60 rounded-sm"></div>
+                  <span className="text-xs text-gray-600">Cikal Bakal</span>
                 </div>
               </div>
             </div>
