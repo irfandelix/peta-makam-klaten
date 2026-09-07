@@ -40,15 +40,18 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
   const [formData, setFormData] = useState({ pemilik: '', status: '' });
   const [isSaving, setIsSaving] = useState(false);
 
+  const [adminPin, setAdminPin] = useState<string | null>(null);
+
   const handleSave = async () => {
-    if (!selectedGrave) return;
+    if (!selectedGrave || !adminPin) return;
     setIsSaving(true);
     
     const result = await updateMakamData(
       selectedGrave.blok, 
       selectedGrave.no, 
       formData.pemilik, 
-      formData.status
+      formData.status,
+      adminPin // Kirim PIN ke server
     );
 
     setIsSaving(false);
@@ -69,15 +72,15 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
           onClick={() => {
             if (isAdmin) {
               setIsAdmin(false);
+              setAdminPin(null);
             } else {
               const pin = prompt("🔒 Masukkan PIN Admin untuk mengedit data:");
               
-              // MENGAMBIL PIN DARI .env.local 👇
-              if (pin === process.env.NEXT_PUBLIC_ADMIN_PIN) {
+              if (pin) {
+                // Simpan PIN sementara, validasi sebenarnya dilakukan di Server
                 setIsAdmin(true);
-                alert("Berhasil! Mode Edit sekarang Aktif.");
-              } else if (pin !== null) {
-                alert("❌ PIN Salah! Anda tidak memiliki akses untuk mengedit data.");
+                setAdminPin(pin);
+                alert("Mode Edit Aktif. (PIN akan divalidasi saat menyimpan data)");
               }
             }
           }}
