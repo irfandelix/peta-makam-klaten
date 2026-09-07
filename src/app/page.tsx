@@ -1,32 +1,13 @@
-import fs from 'fs';
-import path from 'path';
 import MapWrapper from '@/components/MapWrapper';
 
 export default async function Home() {
-  // 1. Ambil KOTAK PETA dari file GeoJSON
-  const filePath = path.join(process.cwd(), 'public/data/database-makam.geojson');
-  let geojsonData = { type: "FeatureCollection", features: [] };
-
-  try {
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      geojsonData = JSON.parse(fileContent);
-    }
-  } catch (error) {
-    console.error("Gagal membaca file makam GeoJSON:", error);
-  }
-
-  // 2. Ambil GARIS BATAS BLOK dari file GeoJSON (Jika sudah dibuat)
-  const batasPath = path.join(process.cwd(), 'public/data/batas-blok.geojson');
+  // 1 & 2. Ambil KOTAK PETA dan GARIS BATAS BLOK langsung dengan import (Aman untuk Vercel)
+  const geojsonData = require('../../public/data/database-makam.geojson');
   let batasData = { type: "FeatureCollection", features: [] };
-
   try {
-    if (fs.existsSync(batasPath)) {
-      const batasContent = fs.readFileSync(batasPath, 'utf8');
-      batasData = JSON.parse(batasContent);
-    }
-  } catch (error) {
-    console.error("Gagal membaca file batas GeoJSON:", error);
+    batasData = require('../../public/data/batas-blok.geojson');
+  } catch (e) {
+    console.error("File batas-blok.geojson tidak ditemukan", e);
   }
 
   // 3. Ambil DATA ALMARHUM dari Firebase Firestore
