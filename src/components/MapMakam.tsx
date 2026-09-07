@@ -224,6 +224,13 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
                     (db) => db.no === p?.No?.toString() && db.blok === p?.Blok
                   );
 
+                  // Cek jika nomor makam masih "-" atau kosong
+                  if (!p?.No || p?.No?.toString().trim() === '-' || p?.No?.toString().trim() === '') {
+                    alert("⚠️ PERHATIAN: Petak makam ini belum memiliki Nomor Kaveling yang unik di data Peta (QGIS). Anda tidak bisa mengisinya sebelum memberikan nomor yang jelas di QGIS.");
+                    setSelectedGrave(null);
+                    return;
+                  }
+
                   setSelectedGrave({blok: p.Blok, no: p.No.toString()});
                   setFormData({
                     pemilik: dataDariDB?.pemilik || '-',
