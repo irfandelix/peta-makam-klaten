@@ -2,12 +2,12 @@ import MapWrapper from '@/components/MapWrapper';
 
 export default async function Home() {
   // 1 & 2. Ambil KOTAK PETA dan GARIS BATAS BLOK langsung dengan import (Aman untuk Vercel)
-  const geojsonData = require('../../public/data/database-makam.geojson');
+  const geojsonData = require('../../public/data/database-makam.json');
   let batasData = { type: "FeatureCollection", features: [] };
   try {
-    batasData = require('../../public/data/batas-blok.geojson');
+    batasData = require('../../public/data/batas-blok.json');
   } catch (e) {
-    console.error("File batas-blok.geojson tidak ditemukan", e);
+    console.error("File batas-blok.json tidak ditemukan", e);
   }
 
   // 3. Ambil DATA ALMARHUM dari Firebase Firestore
