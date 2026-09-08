@@ -84,13 +84,13 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
               }
             }
           }}
-          className={`px-3 py-1.5 rounded-lg shadow-xl text-xs font-bold flex items-center gap-1.5 ${isAdmin ? 'bg-red-600 text-white' : 'bg-white text-gray-800'}`}>
-          {isAdmin ? '🔴 Matikan Mode Edit' : '🔒 Nyalakan Mode Edit'}
+          className={`px-4 py-2 rounded-lg shadow-xl text-xs md:text-sm font-bold flex items-center gap-2 ${isAdmin ? 'bg-red-600 text-white' : 'bg-white text-gray-800'}`}>
+          {isAdmin ? '🔴 Logout Admin' : '🔒 Login Admin'}
         </button>
       </div>
 
     {/* --- PANEL JUDUL & LEGENDA (RESPONSIF) --- */}
-      <div className="absolute top-4 left-14 z-[1000]">
+      <div className="absolute top-4 left-4 md:left-6 z-[1000]">
         <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 w-56 md:w-64">
           
           {/* Header Judul (Bisa diklik di HP untuk buka/tutup) */}
@@ -169,9 +169,8 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
         <MapContainer
             center={center}
             zoom={21}
-            // Kita hilangkan maxBounds sementara atau perlebar agar tidak mengunci saat zoom dekat
-            maxBounds={bounds.pad(0.5)} // Memberikan ruang ekstra 50% di sekitar area makam
-            maxBoundsViscosity={0.5}    // Biar tidak kaku seperti tembok
+            maxBounds={bounds.pad(0.5)}
+            maxBoundsViscosity={0.5}
             minZoom={18}
             maxZoom={22}
             className={`h-full w-full ${isAdmin ? 'cursor-cell' : ''}`}
@@ -182,8 +181,7 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
           <TileLayer 
               url="/tiles/{z}/{x}/{y}.png" 
               maxZoom={22} 
-              maxNativeZoom={22} // PENTING: Ganti angka ini dengan folder angka paling besar hasil export QGIS kamu!
-              detectRetina={true} 
+              maxNativeZoom={22}
             />
           </BaseLayer>
           <BaseLayer name="Google Satellite">
