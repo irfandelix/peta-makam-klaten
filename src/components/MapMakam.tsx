@@ -66,28 +66,6 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
   return (
     <div className="h-screen w-full relative group">
       
-      {/* Tombol Admin */}
-      <div className="absolute bottom-4 left-4 z-[1000]">
-        <button 
-          onClick={() => {
-            if (isAdmin) {
-              setIsAdmin(false);
-              setAdminPin(null);
-            } else {
-              const pin = prompt("🔒 Masukkan PIN Admin untuk mengedit data:");
-              
-              if (pin) {
-                // Simpan PIN sementara, validasi sebenarnya dilakukan di Server
-                setIsAdmin(true);
-                setAdminPin(pin);
-                alert("Mode Edit Aktif. (PIN akan divalidasi saat menyimpan data)");
-              }
-            }
-          }}
-          className={`px-4 py-2 rounded-lg shadow-xl text-xs md:text-sm font-bold flex items-center gap-2 ${isAdmin ? 'bg-red-600 text-white' : 'bg-white text-gray-800'}`}>
-          {isAdmin ? '🔴 Logout Admin' : '🔒 Login Admin'}
-        </button>
-      </div>
 
     {/* --- PANEL JUDUL & LEGENDA (RESPONSIF) --- */}
       <div className="absolute top-4 left-4 md:left-6 z-[1000]">
@@ -160,6 +138,27 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
                   <span className="text-xs text-gray-600">Cikal Bakal</span>
                 </div>
               </div>
+            </div>
+
+            {/* Tombol Login (Pindah ke dalam Legenda) */}
+            <div className="border-t border-gray-100 pt-3 pb-1 mt-1">
+              <button 
+                onClick={() => {
+                  if (isAdmin) {
+                    setIsAdmin(false);
+                    setAdminPin('');
+                  } else {
+                    const pin = prompt("Masukkan PIN Admin:");
+                    if (pin) {
+                      setIsAdmin(true);
+                      setAdminPin(pin);
+                      alert("Mode Edit Aktif. (PIN akan divalidasi saat menyimpan data)");
+                    }
+                  }
+                }}
+                className={`w-full py-2 rounded-lg shadow-sm text-xs md:text-sm font-bold flex items-center justify-center gap-2 transition-colors ${isAdmin ? 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-200' : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200'}`}>
+                {isAdmin ? '🔴 Logout Admin' : '🔒 Login Admin'}
+              </button>
             </div>
           </div>
 
