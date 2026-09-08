@@ -30,3 +30,9 @@ body {
   image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
+
+@media (max-width: 768px) {
+  .leaflet-top {
+    top: 48px !important;
+  }
+}

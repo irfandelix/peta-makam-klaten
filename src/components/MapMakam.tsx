@@ -68,7 +68,7 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
       
 
     {/* --- PANEL JUDUL & LEGENDA (RESPONSIF) --- */}
-      <div className="absolute top-4 left-4 md:left-6 z-[1000]">
+      <div className="absolute top-14 md:top-6 left-4 md:left-6 z-[1000]">
         <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 w-56 md:w-64">
           
           {/* Header Judul (Bisa diklik di HP untuk buka/tutup) */}
