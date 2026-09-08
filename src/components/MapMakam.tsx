@@ -291,7 +291,15 @@ export default function MapMakam({ geojsonData, dbData, batasData }: { geojsonDa
                   <input 
                     type="text" 
                     value={formData.pemilik}
-                    onChange={(e) => setFormData({...formData, pemilik: e.target.value})}
+                    onChange={(e) => {
+                      const newName = e.target.value;
+                      const isKosong = newName.trim() === '' || newName.trim() === '-';
+                      setFormData({
+                        ...formData, 
+                        pemilik: newName,
+                        status: isKosong ? 'Tersedia' : 'Terisi'
+                      });
+                    }}
                     placeholder="Masukkan nama..."
                     className="w-full text-sm p-2.5 border rounded-lg focus:ring-2 focus:ring-green-200 focus:border-green-500 text-gray-900 bg-white placeholder-gray-400"
                   />
